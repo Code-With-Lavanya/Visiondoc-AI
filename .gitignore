@@ -1,0 +1,137 @@
+# ==============================
+# Python
+# ==============================
+
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# ==============================
+# Virtual Environment
+# ==============================
+
+.venv/
+venv/
+env/
+ENV/
+
+# ==============================
+# Environment Variables / Secrets
+# ==============================
+
+.env
+.env.*
+!.env.example
+
+# ==============================
+# IDE
+# ==============================
+
+.vscode/
+.idea/
+
+# ==============================
+# Jupyter
+# ==============================
+
+.ipynb_checkpoints/
+
+# ==============================
+# Temporary / Uploaded Files
+# ==============================
+
+temp_uploads/
+tmp/
+temp/
+uploads/
+sample_images/
+data/
+
+# ==============================
+# Logs
+# ==============================
+
+*.log
+logs/
+
+# ==============================
+# OCR Generated Files
+# ==============================
+
+inference_results/
+output/
+ocr_results/
+
+# ==============================
+# PaddleOCR / PaddleX Cache
+# ==============================
+
+.paddleocr/
+.paddlex/
+
+# ==============================
+# Model / Training Artifacts
+# ==============================
+
+runs/
+
+# Ignore large model weights
+*.pt
+*.pth
+*.onnx
+*.engine
+*.weights
+
+# ==============================
+# Dataset
+# ==============================
+
+data/
+datasets/
+
+# ==============================
+# Python Packaging
+# ==============================
+
+build/
+dist/
+*.egg-info/
+
+# ==============================
+# OS
+# ==============================
+
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ==============================
+# Coverage / Testing
+# ==============================
+
+.coverage
+htmlcov/
+.pytest_cache/
+
+# ==============================
+# Frontend
+# ==============================
+
+frontend/node_modules/
+frontend/.next/
+frontend/dist/
+frontend/build/
+
+# Frontend environment variables
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+
+# ==============================
+# Misc
+# ==============================
+
+*.tmp
+*.temp
