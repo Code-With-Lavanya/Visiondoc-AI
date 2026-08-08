@@ -1,0 +1,33 @@
+# ==============================
+# VisionDoc AI - Backend
+# ==============================
+
+# API
+fastapi
+uvicorn[standard]
+python-multipart
+
+# Environment variables
+python-dotenv
+
+# Computer Vision
+opencv-python
+Pillow
+numpy
+
+# Object Detection
+ultralytics
+
+# Deep Learning
+torch
+torchvision
+
+# OCR
+paddlepaddle
+paddleocr
+
+# Google Gemini / LLM
+google-genai
+
+# Data / Utilities
+pydantic
