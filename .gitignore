@@ -46,7 +46,6 @@ temp_uploads/
 tmp/
 temp/
 uploads/
-sample_images/
 data/
 
 # ==============================
@@ -74,8 +73,6 @@ ocr_results/
 # ==============================
 # Model / Training Artifacts
 # ==============================
-
-runs/
 
 # Ignore large model weights
 *.pt
