@@ -19,7 +19,7 @@ export default function HistoryPage() {
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
           A record of previous chest X-ray analyses. This is sample data —
-          VisionDoc AI doesn&apos;t persist analyses to an account yet.
+          VisionDoc AI does not persist analyses to an account yet.
         </p>
       </div>
 
