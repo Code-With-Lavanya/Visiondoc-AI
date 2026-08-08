@@ -1,0 +1,34 @@
+# ================================
+# VisionDoc AI
+# Python: 3.11.15
+# ================================
+
+# ---------- FastAPI ----------
+fastapi==0.116.1
+uvicorn[standard]==0.35.0
+python-multipart==0.0.20
+
+# ---------- Environment ----------
+python-dotenv==1.1.1
+
+# ---------- Validation ----------
+pydantic==2.11.7
+
+# ---------- Numerical / Image ----------
+numpy==1.26.4
+Pillow==11.3.0
+opencv-python-headless==4.11.0.86
+
+# ---------- Deep Learning ----------
+torch==2.6.0
+torchvision==0.21.0
+
+# ---------- YOLO ----------
+ultralytics==8.3.180
+
+# ---------- OCR ----------
+paddlepaddle==2.6.2
+paddleocr==2.10.0
+
+# ---------- Gemini ----------
+google-genai==1.28.0
