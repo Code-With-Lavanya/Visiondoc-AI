@@ -12,7 +12,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://YOUR-VERCEL-DOMAIN.vercel.app",
+        "https://visiondoc-ai.onrender.com/",
     ],
     allow_credentials=True,
     allow_methods=["*"],
