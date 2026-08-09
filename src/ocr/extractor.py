@@ -9,7 +9,7 @@ class OCRExtractor:
         )
 
     def extract(self, image_path: str):
-        result = self.ocr.ocr(image_path)
+        result = self.ocr.predict(image_path)
 
         extracted_text = []
 
