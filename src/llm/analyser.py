@@ -44,8 +44,7 @@ class MedicalAnalyzer:
     def analyze(
         self,
         total_detections: int,
-        detections: list,
-        ocr_text: str
+        detections: list
     ):
 
         user_prompt = f"""Analyze the following chest X-ray detection results.
