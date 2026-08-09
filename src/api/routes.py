@@ -14,8 +14,9 @@ router = APIRouter(
 
 UPLOAD_DIR = Path("temp_uploads")
 UPLOAD_DIR.mkdir(exist_ok=True)
-@router.post("/", response_model=PredictionResponse)
+@router.post("/")
 async def predict(file: UploadFile = File(...)):
+    print("🔥🔥🔥 PREDICT ROUTE HIT 🔥🔥🔥", flush=True)
 
     from src.inference.predictor import predictor
     from src.ocr.extractor import ocr_extractor
