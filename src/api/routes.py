@@ -24,8 +24,10 @@ async def predict(file: UploadFile = File(...)):
 
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
-
+    print("STEP 1: file received")
     result = predictor.predict(str(file_path))
+    print("STEP 2: YOLO completed")
+
 
     detections = []
 
@@ -38,12 +40,14 @@ async def predict(file: UploadFile = File(...)):
     confidences = [d["confidence"] for d in detections]
 
     ocr_text = ocr_extractor.extract(str(file_path))
+    print("STEP 3: OCR completed")
 
     explanation = analyzer.analyze(
         total_detections=len(detections),
         detections=detections,
         ocr_text=ocr_text
     )
+    print("STEP 3: OCR completed")
     return PredictionResponse(
         total_detections=len(detections),
         detections=detections,
