@@ -134,7 +134,7 @@ export default function SettingsPage() {
             <Switch checked={analysisAlerts} onCheckedChange={setAnalysisAlerts} />
           </div>
           <p className="pt-1 text-xs text-muted-foreground">
-            Notification preferences are illustrative only and aren't wired
+            Notification preferences are illustrative only and are not wired
             up to a backend yet.
           </p>
         </CardContent>
