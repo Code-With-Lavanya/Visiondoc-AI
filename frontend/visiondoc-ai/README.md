@@ -2,9 +2,9 @@
 
 A production-quality Next.js 15 (App Router) dashboard for **VisionDoc AI**, an
 AI-assisted chest X-ray triage tool. The frontend uploads an X-ray to your
-FastAPI + YOLO11 + PaddleOCR + Gemini backend, then renders detections,
-confidence scores, extracted report text (OCR), and a structured,
-patient-friendly AI explanation.
+FastAPI + YOLO11 + Gemini backend, then renders detections, confidence
+scores, and an AI-generated explanation — with a dedicated section already
+wired up for **OCR results, once you implement that feature.**
 
 ## Tech stack
 
@@ -60,8 +60,8 @@ components/
   dashboard/                 Hero, status cards, feature highlights
   upload/                    Drag & drop dropzone, Analyze button
   analysis/                  Workspace orchestrator, loading UI, empty state
-  results/                   X-ray viewer w/ bbox overlay, detections, OCR
-                              text, and structured AI explanation
+  results/                   X-ray viewer w/ bbox overlay, detections, AI
+                              explanation, OCR placeholder section
   shared/                    Logo, error banner, backend status badge
 
 hooks/                      use-image-upload, use-analyze, use-backend-status
@@ -70,35 +70,30 @@ types/index.ts              Shared TypeScript types (see below)
 lib/                        cn() helper, constants, dummy history data
 ```
 
-## API response shape
+## Future-ready OCR & API design
 
-The backend returns:
+The backend currently returns:
 
 ```json
 {
   "total_detections": 2,
   "detections": [{ "confidence": 0.15, "bbox": [605, 353, 810, 796] }],
-  "ocr_text": "...",
-  "ai_explanation": {
-    "summary": "...",
-    "findings": ["...", "..."],
-    "limitations": "...",
-    "recommendation": "..."
-  }
+  "ai_explanation": "..."
 }
 ```
 
-`types/index.ts` models this exactly — `ocr_text` and `ai_explanation` are
-required fields, and `AiExplanation` is a structured object rendered as a
-summary, a findings list, a limitations callout, and a recommendation
-callout in `AiExplanationCard`.
+`types/index.ts` already models `ocr_text`, `annotated_image`, and
+`medical_report` as **optional** fields on `PredictionResponse`. The
+`OcrSection` component (`components/results/ocr-section.tsx`) checks for
+`result.ocr_text`:
 
-Two fields remain modeled as **optional** for forward compatibility —
-`annotated_image` and `medical_report` — in case the backend adds a
-server-rendered annotated image or a fuller structured report later. They
-aren't read by any component yet; add a `result.medical_report` /
-`result.annotated_image` check wherever you want them to appear once the
-backend starts returning them.
+- **Today**, it's always `undefined` → renders "OCR feature coming soon."
+- **Once your backend adds `ocr_text` to the response**, the same component
+  automatically renders the real extracted text — no UI or architecture
+  changes required.
+
+The rest of the app follows the same principle: components read optional
+fields defensively so new backend capabilities light up automatically.
 
 ## Notes
 

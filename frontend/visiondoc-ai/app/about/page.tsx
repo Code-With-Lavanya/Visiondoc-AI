@@ -17,7 +17,7 @@ const TECH_STACK = [
   "FastAPI",
   "YOLO11",
   "Gemini LLM",
-  "PaddleOCR",
+  "PaddleOCR (upcoming)",
 ];
 
 const PIPELINE_STEPS = [
@@ -31,14 +31,14 @@ const PIPELINE_STEPS = [
       "A YOLO11 model detects regions of interest and returns bounding boxes with confidence scores.",
   },
   {
-    title: "OCR",
-    description:
-      "Report text present in the image is extracted and returned alongside the detections.",
-  },
-  {
     title: "Explanation",
     description:
-      "Gemini converts the detection and OCR data into a structured, patient-friendly explanation.",
+      "Gemini converts the raw detection data into a clear, patient-friendly explanation.",
+  },
+  {
+    title: "OCR (coming soon)",
+    description:
+      "Scanned report text will be extracted and displayed alongside each result.",
   },
 ];
 
@@ -64,9 +64,13 @@ export default function AboutPage() {
         <CardContent className="space-y-3 text-sm leading-relaxed text-muted-foreground">
           <p>
             VisionDoc AI is an AI-assisted triage dashboard for chest X-rays.
-            It combines a YOLO11 object detection model, OCR-based report
-            text extraction, and an AI-generated explanation to help
-            clinicians and researchers quickly review each image.
+            It combines a YOLO11 object detection model with an AI-generated
+            explanation to help clinicians and researchers quickly review
+            regions of interest in an image.
+          </p>
+          <p>
+            The project is under active development. OCR-based report text
+            extraction is planned but not yet implemented on the backend.
           </p>
         </CardContent>
       </Card>

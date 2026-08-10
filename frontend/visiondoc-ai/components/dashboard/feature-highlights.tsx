@@ -22,8 +22,8 @@ const FEATURES = [
     icon: FileSearch,
     title: "OCR Report Extraction",
     description:
-      "Extracts report text found in each X-ray image, shown alongside the detections and AI explanation.",
-    badge: null,
+      "Extract text from scanned report documents alongside each X-ray for a fuller picture.",
+    badge: "Coming Soon",
   },
 ];
 

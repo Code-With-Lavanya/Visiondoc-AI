@@ -9,10 +9,7 @@ class OCRExtractor:
         )
 
     def extract(self, image_path: str):
-
-        result = self.ocr.ocr(image_path)
-
-        print(result)
+        result = self.ocr.predict(image_path)
 
         extracted_text = []
 
@@ -21,7 +18,6 @@ class OCRExtractor:
                 continue
 
             rec_texts = page.get("rec_texts", [])
-
             extracted_text.extend(rec_texts)
 
         return "\n".join(extracted_text)

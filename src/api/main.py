@@ -4,16 +4,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from src.api.routes import router
 
 app = FastAPI(
-    title="Vision Doc AI",
-    version="1.0.0"
+    title="VisionDoc AI",
+    version="1.0.0",
+    description="AI-powered medical image analysis API"
 )
 
-# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
+        "https://visiondoc-ai.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],

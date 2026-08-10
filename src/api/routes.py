@@ -1,10 +1,9 @@
 from pathlib import Path
 import shutil
-#from src.ocr.extractor import ocr_extractor
 from fastapi import APIRouter, UploadFile, File
-#from src.inference.predictor import predictor
+from src.inference.predictor import predictor
 from src.api.schemas import PredictionResponse
-#from src.llm.analyser import analyzer
+from src.llm.analyser import analyzer
 
 
 router = APIRouter(
@@ -14,18 +13,17 @@ router = APIRouter(
 
 UPLOAD_DIR = Path("temp_uploads")
 UPLOAD_DIR.mkdir(exist_ok=True)
-@router.post("/", response_model=PredictionResponse)
+@router.post("/")
 async def predict(file: UploadFile = File(...)):
-
-    from src.inference.predictor import predictor
-    from src.ocr.extractor import ocr_extractor
-    from src.llm.analyser import analyzer
+    print("🔥🔥🔥 PREDICT ROUTE HIT 🔥🔥🔥", flush=True)
     file_path = UPLOAD_DIR / file.filename
 
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
-
+    print("STEP 1: file received")
     result = predictor.predict(str(file_path))
+    print("STEP 2: YOLO completed")
+
 
     detections = []
 
@@ -37,16 +35,13 @@ async def predict(file: UploadFile = File(...)):
 
     confidences = [d["confidence"] for d in detections]
 
-    ocr_text = ocr_extractor.extract(str(file_path))
-
     explanation = analyzer.analyze(
         total_detections=len(detections),
-        detections=detections,
-        ocr_text=ocr_text
+        detections=detections
     )
+    print("STEP 3: OCR completed")
     return PredictionResponse(
         total_detections=len(detections),
         detections=detections,
-        ocr_text=ocr_text,
         ai_explanation=explanation
     )

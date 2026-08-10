@@ -5,30 +5,34 @@ from dotenv import load_dotenv
 load_dotenv()
 
 SYSTEM_PROMPT = """
-You are VisionDoc AI, an AI-powered medical imaging assistant.
+You are VisionDoc AI's medical image analysis assistant.
 
-Your purpose is to explain AI-generated findings from chest X-rays in a clear, safe, and patient-friendly manner.
+You analyze chest X-ray findings detected by a YOLO-based computer vision model.
 
-Rules:
+Your analysis must be based ONLY on the detection data provided in the user message.
 
-1. Never claim a diagnosis with certainty.
-2. Clearly state that this is an AI-assisted analysis.
-3. Confidence scores represent model confidence, NOT medical certainty.
-4. Consider both:
-   - Object detection findings
-   - OCR extracted report (if available)
-5. If OCR text is empty or unavailable, rely only on object detection results.
-6. Do NOT prescribe medications.
-7. Do NOT recommend treatment.
-8. Recommend review by a qualified radiologist or physician.
-9. If no suspicious regions are detected, mention that the AI did not detect obvious abnormalities, but this does not rule out disease.
-10. Keep the explanation concise, professional and easy to understand.
-11. Never hallucinate medical findings.
-12. Do not invent information that is not present in the inputs.
+STRICT RULES:
+- Do not use or assume OCR text. No OCR data is available.
+- Do not invent findings, abnormalities, classes, confidence scores, or patient information.
+- Do not infer symptoms, medical history, age, gender, or other patient details.
+- Do not make a definitive medical diagnosis.
+- Do not recommend medications, treatments, or medical procedures.
+- Treat YOLO detections as model predictions, not confirmed clinical findings.
+- Clearly communicate uncertainty, especially for low-confidence detections.
+- If there are no detections, state that no supported abnormality was detected by the model.
+- Never fabricate information to make the response more informative.
+- Do not mention internal implementation details such as YOLO, prompts, APIs, model architecture, embeddings, or backend systems unless explicitly asked.
 
-Return plain English only.
-Maximum 180 words.
-"""
+For detected findings:
+- Identify the detected abnormality/class.
+- Report its confidence percentage.
+- Briefly explain what the detected finding may indicate in general medical terms.
+- If multiple findings exist, summarize them clearly and prioritize higher-confidence findings.
+
+Maintain a concise, professional, clinically cautious tone.
+
+Always end with:
+"This AI-generated analysis is for informational and research purposes only and is not a medical diagnosis. Please consult a qualified healthcare professional for clinical interpretation."""
 
 class MedicalAnalyzer:
 
@@ -40,49 +44,31 @@ class MedicalAnalyzer:
     def analyze(
         self,
         total_detections: int,
-        detections: list,
-        ocr_text: str
+        detections: list
     ):
 
-        user_prompt = f"""
-        Analyze the following AI outputs.
+        user_prompt = f"""Analyze the following chest X-ray detection results.
 
-        YOLO Detection Results
-
-        Total Suspicious Regions:
-        {total_detections}
-
-        Detection Details:
-
-        {detections}
-
-        OCR Extracted Text:
-
-        {ocr_text}
-
-        Generate a structured explanation using exactly this format.
-
-        Summary:
-        (A brief summary in 2-3 sentences.)
-
-        Findings:
-        - Mention suspicious regions detected.
-        - Mention confidence levels in percentage.
-        - Mention whether OCR text supports or contradicts the findings.
-
-        Limitations:
-        Explain that:
-        - This is AI-assisted.
-        - It is not a confirmed diagnosis.
-        - Confidence is model confidence only.
-
-        Recommendation:
-        Recommend consultation with a qualified radiologist or physician for confirmation.
-
-        Do not use markdown.
-        Do not use bullet nesting.
-        Do not hallucinate.
-        """
+         Total detections:
+         {total_detections}
+         
+         Detection results:
+         {detections}
+         
+         Provide the response in this format:
+         
+         Summary:
+         <2–3 concise sentences summarizing the detected findings>
+         
+         Detected Findings:
+         - <Finding/Class> — <confidence>%: <brief explanation>
+         - <Finding/Class> — <confidence>%: <brief explanation>
+         
+         Overall Assessment:
+         <Brief interpretation of the model's overall findings, including uncertainty where appropriate>
+         
+         Do not add information that is not supported by the detection results."""
+       
         response = self.client.models.generate_content(
             model="gemini-3.5-flash",
             contents=[

@@ -2,7 +2,7 @@ export const APP_NAME = "VisionDoc AI";
 export const APP_TAGLINE = "AI-Powered Chest X-ray Analysis";
 export const APP_VERSION = "1.0.0";
 export const APP_DESCRIPTION =
-  "VisionDoc AI helps clinicians and researchers rapidly triage chest X-rays using a YOLO11 detection model, OCR-based report text extraction, and an AI-generated, patient-friendly explanation.";
+  "VisionDoc AI helps clinicians and researchers rapidly triage chest X-rays using a YOLO11 detection model and an AI-generated, patient-friendly explanation — with OCR-based report extraction coming soon.";
 
 export const GITHUB_URL = "https://github.com/your-username/visiondoc-ai";
 
